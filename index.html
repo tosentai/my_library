@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="book.png" type="image/x-icon">
+    <title>Моя бібліотека</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Моя бібліотека</h1>
+    
+        <div class="tabs">
+            <button class="tab-button" onclick="showTab('wishlist')">Список бажань</button>
+            <button class="tab-button" onclick="showTab('inProgress')">В процесі</button>
+            <button class="tab-button" onclick="showTab('completed')">Завершені</button>
+            <button class="tab-button" onclick="showTab('quotes')">Цитати</button>
+        </div>
+
+        <div id="wishlist" class="tab-content">
+            <h2>Список бажань</h2>
+            <button class="large-button" onclick="addBook('wishlist')">Додати книгу</button>
+            <div class="search-container">
+                <input type="text" id="wishlist-search" placeholder="Пошук за назвою або за автором..." oninput="searchBooks('wishlist')">
+            </div>
+            <ul id="wishlist-list"></ul>
+        </div>
+        
+        <div id="inProgress" class="tab-content">
+            <h2>В процесі</h2>
+            <button class="large-button" onclick="addBook('inProgress')">Додати книгу</button>
+            <div class="search-container">
+                <input type="text" id="inProgress-search" placeholder="Пошук за назвою або за автором..." oninput="searchBooks('inProgress')">
+            </div>
+            <ul id="inProgress-list"></ul>
+        </div>
+        
+        <div id="completed" class="tab-content">
+            <h2>Завершені</h2>
+            <div class="actions-container">
+                <button class="large-button" onclick="addBook('completed')">Додати книгу</button>
+                <div class="filter-container">
+                    <label for="favorite-filter">Показати лише улюблені:</label>
+                    <input type="checkbox" id="favorite-filter" onchange="filterFavorites()">
+                </div>
+            </div>
+            <div class="search-container">
+                <input type="text" id="completed-search" placeholder="Пошук за назвою або за автором..." oninput="searchBooks('completed')">
+            </div>
+            <ul id="completed-list"></ul>
+        </div>        
+        
+        <div id="quotes" class="tab-content">
+            <h2>Цитати</h2>
+            <button class="large-button" onclick="openQuoteModal()">Додати цитату</button>
+            <ul id="quotes-list"></ul>
+        </div>
+        
+    
+        <div class="buttons-container">
+            <button class="export-button" onclick="exportToJSON()">Експортувати в JSON</button>
+            
+            <input type="file" id="importFile" style="display: none;" onchange="importFromJSON(event)">
+            <button class="import-button" onclick="document.getElementById('importFile').click()">Імпортувати з JSON</button>
+        </div>  
+    </div>
+    
+    <div id="quoteModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeQuoteModal()">&times;</span>
+            <h2>Виберіть книгу для цитати</h2>
+            <select id="bookSelect"></select>
+            <textarea id="quoteText" placeholder="Напишіть цитату..."></textarea>
+            <button onclick="addQuote()">Додати цитату</button>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
